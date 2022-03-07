@@ -1,0 +1,35 @@
+.main_block {
+  border-radius: 5px;
+  border: 1px solid #d9e9e9;
+  padding: 40px 30px;
+  margin-bottom: 25px;
+  background-color: #ffffff;
+  display: flex;
+  box-sizing: border-box;
+  width: 48.5%;
+}
+.main_block:hover {
+  transform: translateY(-3px);
+  top: -3px;
+  box-shadow: 0 10px 20px 0 rgb(108 135 135 / 20%);
+  cursor: pointer;
+}
+.block_text {
+  display: flex;
+  margin: 0 10px;
+  justify-content: center;
+  flex-direction: column;
+}
+.block_text p {
+  line-height: 1.7em;
+}
+.main_block img {
+  width: 60px;
+  height: 60px;
+}
+
+@media screen and (max-width: 800px) {
+  .main_block {
+    width: 100%;
+  }
+}

@@ -1,0 +1,8 @@
+.logo a svg {
+  height: 48px;
+}
+@media screen and (max-width: 950px) {
+  .logo a svg {
+    height: 40px;
+  }
+}

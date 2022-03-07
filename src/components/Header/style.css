@@ -1,0 +1,11 @@
+.centered-container {
+  margin: 0 auto;
+  max-width: 1140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}

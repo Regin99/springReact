@@ -1,0 +1,15 @@
+.hamburger_container {
+  display: none;
+}
+.hamburger_line {
+  width: 25px;
+  height: 3px;
+  background-color: #191e1e;
+  margin: 5px;
+}
+
+@media screen and (max-width: 900px) {
+  .hamburger_container {
+    display: block;
+  }
+}

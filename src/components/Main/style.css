@@ -1,0 +1,30 @@
+.centered-container {
+  margin: 0 auto;
+  max-width: 1140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+}
+.main_section {
+  padding: 30px;
+  margin-top: 50px;
+}
+.main_section h1 {
+  font-size: 3.75rem;
+  font-weight: bold;
+}
+.main_section p {
+  margin-bottom: 80px;
+  font-size: 1.5rem;
+  line-height: 1.7em;
+}
+.content_container {
+  background-color: #ebf2f2;
+  display: flex;
+  min-height: 200px;
+  flex-direction: column;
+}
