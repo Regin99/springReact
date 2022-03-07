@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Regin99/springReact/static/css/main.abc7f0ff.css",
+    "main.js": "/Regin99/springReact/static/js/main.9f2f5543.js",
+    "index.html": "/Regin99/springReact/index.html",
+    "main.abc7f0ff.css.map": "/Regin99/springReact/static/css/main.abc7f0ff.css.map",
+    "main.9f2f5543.js.map": "/Regin99/springReact/static/js/main.9f2f5543.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.abc7f0ff.css",
+    "static/js/main.9f2f5543.js"
+  ]
+}
