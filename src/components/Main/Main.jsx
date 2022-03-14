@@ -1,6 +1,5 @@
 import "./style.css";
 import ProjectContainer from "../ProjectContainer/ProjectContainer";
-import projects from "./projects.json";
 const Main = () => {
   return (
     <div className="main">
@@ -16,7 +15,7 @@ const Main = () => {
         </section>
       </div>
       <div className="contetnt_container">
-        <ProjectContainer projects={projects} />
+        <ProjectContainer />
       </div>
     </div>
   );

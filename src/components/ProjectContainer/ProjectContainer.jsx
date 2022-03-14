@@ -1,20 +1,14 @@
 import "./style.css";
 import ProjectItem from "../ProjectItem/ProjectItem";
 import InputFilter from "../InputFilter/InputFilter";
-import { useState } from "react";
-const ProjectContainer = ({ projects }) => {
-  const [projectList, setProjectList] = useState(
-    projects.map((item) => {
-      return {
-        ...item,
-        isVisiable: true,
-      };
-    })
-  );
+import { useSelector } from "react-redux";
+
+const ProjectContainer = () => {
+  const projectList = useSelector((state) => state.projects);
 
   return (
     <div className="content_container">
-      <InputFilter projectList={projectList} setProjectList={setProjectList} />
+      <InputFilter />
       <div className="centered-container">
         <div className="main_container">
           {projectList.every((project) => {

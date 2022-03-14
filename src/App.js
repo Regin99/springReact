@@ -1,12 +1,23 @@
 import "./App.css";
-import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
+import LoginPage from "./components/LoginPage/LoginPage";
+import Page from "./components/Page/Page";
+import { Route, Routes } from "react-router-dom";
+import RequireAuth from "./utils/RequireAuth";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Main />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Page />
+            </RequireAuth>
+          }
+        />
+      </Routes>
     </div>
   );
 }

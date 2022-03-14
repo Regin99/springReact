@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import "./style.css";
 import useDebounce from "../../hooks/useDebounce";
+import { store } from "../../redux/store";
+import { FILTER_PROJECTS } from "../../redux/actions";
 
-const InputFilter = ({ projectList, setProjectList }) => {
+const InputFilter = () => {
   const [filter, setFilter] = useState("");
   const debouncedFilter = useDebounce({ value: filter, delay: 300 });
 
@@ -11,34 +13,10 @@ const InputFilter = ({ projectList, setProjectList }) => {
   };
 
   useEffect(() => {
-    debouncedFilter &&
-      setProjectList(
-        projectList.map((item) => {
-          if (
-            item.title.toUpperCase().indexOf(filter.toUpperCase()) > -1 ||
-            item.text.toUpperCase().indexOf(filter.toUpperCase()) > -1
-          ) {
-            return {
-              ...item,
-              isVisiable: true,
-            };
-          } else {
-            return {
-              ...item,
-              isVisiable: false,
-            };
-          }
-        })
-      );
-    !debouncedFilter &&
-      setProjectList(
-        projectList.map((item) => {
-          return {
-            ...item,
-            isVisiable: true,
-          };
-        })
-      );
+    store.dispatch({
+      type: FILTER_PROJECTS,
+      payload: debouncedFilter,
+    });
   }, [debouncedFilter]);
 
   return (
