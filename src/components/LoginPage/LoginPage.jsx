@@ -1,47 +1,34 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { store } from "../../redux/store";
-import { LOGIN_ACTION } from "../../redux/actions";
 import { useSelector } from "react-redux";
+import Loader from "../Loader/Loader";
 import "./style.css";
-
-const LOGIN = "admin";
-const PASSWORD = "1234";
+import { store } from "../../redux/store";
+import { loginThunk } from "../../redux/actions/auth";
 
 const LoginPage = () => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
+  const isFetching = useSelector((state) => state.auth.isFetching);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (login === LOGIN && password === PASSWORD) {
-      store.dispatch({
-        type: LOGIN_ACTION,
-        payload: {
-          isLoggedIn: true,
-          user: {
-            login: LOGIN,
-            password: PASSWORD,
-          },
-        },
-      });
-      navigate("/");
-    } else {
-      setLogin("");
-      setPassword("");
-      alert("Wrong login or password");
-    }
+    store.dispatch(loginThunk(login, password));
+    setLogin("");
+    setPassword("");
   };
 
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/");
     }
-  }, []);
+  }, [isAuthenticated]);
 
-  return (
+  return isFetching ? (
+    <Loader />
+  ) : (
     <form className="login_form">
       <label>
         Login:

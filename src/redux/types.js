@@ -1,3 +1,3 @@
 export const FILTER_PROJECTS = "FILTER_PROJECTS";
 export const LOGIN_ACTION = "LOGIN_ACTION";
-export const LOGOUT_ACTION = "LOGOUT_ACTION";
+export const FETCHING = "FETCHING";
