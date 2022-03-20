@@ -8,9 +8,10 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route exact path="/login" element={<LoginPage />} />
         <Route
           path="/"
+          exact
           element={
             <RequireAuth>
               <Page />

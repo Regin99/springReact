@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import "./style.css";
 import useDebounce from "../../hooks/useDebounce";
-import { store } from "../../redux/store";
-import { FILTER_PROJECTS } from "../../redux/actions";
+import { connect } from "react-redux";
+import filterThunk from "../../redux/actions/filter";
 
-const InputFilter = () => {
+const InputFilter = ({ filterThunk }) => {
   const [filter, setFilter] = useState("");
   const debouncedFilter = useDebounce({ value: filter, delay: 300 });
 
@@ -13,10 +13,7 @@ const InputFilter = () => {
   };
 
   useEffect(() => {
-    store.dispatch({
-      type: FILTER_PROJECTS,
-      payload: debouncedFilter,
-    });
+    filterThunk(debouncedFilter);
   }, [debouncedFilter]);
 
   return (
@@ -30,4 +27,10 @@ const InputFilter = () => {
   );
 };
 
-export default InputFilter;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    filterThunk: (filter) => dispatch(filterThunk(filter)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(InputFilter);

@@ -1,5 +1,5 @@
 import projects from "../projects.json";
-import { FILTER_PROJECTS } from "../actions";
+import { FILTER_PROJECTS } from "../types";
 
 const initialState = projects.map((item) => {
   return {
