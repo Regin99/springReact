@@ -1,21 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
+import { connect } from "react-redux";
 import "./style.css";
-import { store } from "../../redux/store";
 import { loginThunk } from "../../redux/actions/auth";
 
-const LoginPage = () => {
-  const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
-  const isFetching = useSelector((state) => state.auth.isFetching);
+const LoginPage = ({ isAuthenticated, isFetching, loginThunk }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const handleInput = (e) => {
+    switch (e.target.name) {
+      case "login":
+        setLogin(e.target.value);
+        break;
+      case "password":
+        setPassword(e.target.value);
+        break;
+      default:
+        break;
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    store.dispatch(loginThunk(login, password));
+    loginThunk(login, password);
     setLogin("");
     setPassword("");
   };
@@ -32,22 +40,15 @@ const LoginPage = () => {
     <form className="login_form">
       <label>
         Login:
-        <input
-          type="text"
-          value={login}
-          onChange={(e) => {
-            setLogin(e.target.value);
-          }}
-        />
+        <input type="text" name="login" value={login} onChange={handleInput} />
       </label>
       <label>
         Password:
         <input
           type="password"
+          name="password"
           value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          onChange={handleInput}
         />
       </label>
       <input type="submit" value="Login" onClick={handleSubmit} />
@@ -55,4 +56,17 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isLoggedIn,
+    isFetching: state.auth.isFetching,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginThunk: (login, password) => dispatch(loginThunk(login, password)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

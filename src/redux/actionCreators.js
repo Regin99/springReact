@@ -1,4 +1,4 @@
-import { LOGIN_ACTION, FETCHING } from "./types";
+import { LOGIN_ACTION, FETCHING, FILTER_PROJECTS } from "./types";
 
 export const loginAction = (login, password) => ({
   type: LOGIN_ACTION,
@@ -16,4 +16,9 @@ export const fetchingAction = (fetch) => ({
   payload: {
     isFetching: fetch,
   },
+});
+
+export const filterAction = (filter) => ({
+  type: FILTER_PROJECTS,
+  payload: filter,
 });

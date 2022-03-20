@@ -15,8 +15,8 @@ export const loginThunk = (login, password) => (dispatch) => {
   dispatch(fetchingAction(true));
   fakeLoginRequest(login, password)
     .then(() => {
-      dispatch(loginAction(login, password));
       dispatch(fetchingAction(false));
+      dispatch(loginAction(login, password));
     })
     .catch((error) => {
       dispatch(fetchingAction(false));
