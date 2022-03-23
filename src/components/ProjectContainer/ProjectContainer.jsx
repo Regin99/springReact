@@ -1,10 +1,14 @@
 import "./style.css";
 import ProjectItem from "../ProjectItem/ProjectItem";
 import InputFilter from "../InputFilter/InputFilter";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
+import { getProjectsThunk } from "../../redux/actions/getProjects";
+import { useEffect } from "react";
 
-const ProjectContainer = () => {
-  const projectList = useSelector((state) => state.projects);
+const ProjectContainer = ({ projectList, getProjectsThunk }) => {
+  useEffect(() => {
+    getProjectsThunk();
+  }, []);
 
   return (
     <div className="content_container">
@@ -33,5 +37,14 @@ const ProjectContainer = () => {
     </div>
   );
 };
-
-export default ProjectContainer;
+const mapStateToProps = (state) => {
+  return {
+    projectList: state.projects,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProjectsThunk: () => dispatch(getProjectsThunk()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectContainer);

@@ -1,3 +1,4 @@
 export const FILTER_PROJECTS = "FILTER_PROJECTS";
 export const LOGIN_ACTION = "LOGIN_ACTION";
 export const FETCHING = "FETCHING";
+export const GET_PROJECTS = "GET_PROJECTS";

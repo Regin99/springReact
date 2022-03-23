@@ -1,32 +1,24 @@
-import projects from "../projects.json";
-import { FILTER_PROJECTS } from "../types";
+import { FILTER_PROJECTS, GET_PROJECTS } from "../types";
 
-const initialState = projects.map((item) => {
-  return {
-    ...item,
-    isVisiable: true,
-  };
-});
+const initialState = [];
 
 const projectReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FILTER_PROJECTS:
-      return state.map((item) => {
-        if (
-          item.title.toUpperCase().indexOf(action.payload.toUpperCase()) > -1 ||
-          item.text.toUpperCase().indexOf(action.payload.toUpperCase()) > -1
-        ) {
-          return {
-            ...item,
-            isVisiable: true,
-          };
-        } else {
-          return {
-            ...item,
-            isVisiable: false,
-          };
-        }
+    case GET_PROJECTS:
+      return action.payload.projectList.map((item) => {
+        return {
+          ...item,
+          isVisiable: true,
+        };
       });
+
+    case FILTER_PROJECTS:
+      return action.payload.projectList.map((item) => {
+        return {
+          ...item,
+        };
+      });
+
     default:
       return state;
   }
