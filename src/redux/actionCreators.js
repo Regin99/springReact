@@ -1,24 +1,29 @@
-import { LOGIN_ACTION, FETCHING, FILTER_PROJECTS } from "./types";
+import { LOGIN_ACTION, FETCHING, FILTER_PROJECTS, GET_PROJECTS } from "./types";
 
-export const loginAction = (login, password) => ({
+export const loginAction = (login, password, isLoggedIn) => ({
   type: LOGIN_ACTION,
   payload: {
-    isLoggedIn: true,
-    user: {
-      login,
-      password,
-    },
+    isLoggedIn,
   },
 });
 
-export const fetchingAction = (fetch) => ({
+export const getProjectsAction = (projectList) => ({
+  type: GET_PROJECTS,
+  payload: {
+    projectList,
+  },
+});
+
+export const fetchingAction = (isFetching) => ({
   type: FETCHING,
   payload: {
-    isFetching: fetch,
+    isFetching,
   },
 });
 
-export const filterAction = (filter) => ({
+export const filterAction = (projectList) => ({
   type: FILTER_PROJECTS,
-  payload: filter,
+  payload: {
+    projectList,
+  },
 });

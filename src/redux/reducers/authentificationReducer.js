@@ -1,5 +1,4 @@
 import { FETCHING, LOGIN_ACTION } from "../types";
-
 const initialState = {
   isFetching: false,
   isLoggedIn: false,
@@ -19,9 +18,7 @@ const authentificationReducer = (state = persistedState, action) => {
     case LOGIN_ACTION:
       return {
         ...state,
-        isFetching: false,
-        isLoggedIn: true,
-        user: action.payload.user,
+        isLoggedIn: action.payload.isLoggedIn,
       };
     default:
       return state;

@@ -1,25 +1,26 @@
 import { loginAction, fetchingAction } from "../actionCreators";
+import axios from "axios";
 
-const fakeLoginRequest = (login, password) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (login === "admin" && password === "1234") {
-        resolve();
-      } else {
-        reject("wrong login or password");
-      }
-    }, 1000);
+export const fakeLoginRequest = (login, password) => {
+  return axios.post("http://localhost:5000/login", {
+    login,
+    password,
   });
 };
 export const loginThunk = (login, password) => (dispatch) => {
   dispatch(fetchingAction(true));
   fakeLoginRequest(login, password)
-    .then(() => {
+    .then((response) => {
       dispatch(fetchingAction(false));
-      dispatch(loginAction(login, password));
+      if (response.data.isLoggedIn) {
+        dispatch(loginAction(login, password, response.data.isLoggedIn));
+      } else {
+        alert("Wrong login or password");
+      }
     })
     .catch((error) => {
       dispatch(fetchingAction(false));
-      alert(error);
+      alert("cannot connect to server");
+      console.log(error);
     });
 };
