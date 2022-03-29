@@ -1,5 +1,6 @@
 import "./style.css";
 import ProjectContainer from "../ProjectContainer/ProjectContainer";
+import React from "react";
 const Main = () => {
   return (
     <div className="main">

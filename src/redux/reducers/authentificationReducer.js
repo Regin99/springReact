@@ -1,4 +1,4 @@
-import { FETCHING, LOGIN_ACTION } from "../types";
+import { LOGIN_REQUEST, LOGIN_FAILURE, LOGIN_SUCCESS } from "../types";
 const initialState = {
   isFetching: false,
   isLoggedIn: false,
@@ -10,15 +10,23 @@ const persistedState = localStorage.getItem("store")
 
 const authentificationReducer = (state = persistedState, action) => {
   switch (action.type) {
-    case FETCHING:
+    case LOGIN_REQUEST:
       return {
         ...state,
-        isFetching: action.payload.isFetching,
+        isLoggedIn: false,
+        isFetching: true,
       };
-    case LOGIN_ACTION:
+    case LOGIN_SUCCESS:
       return {
         ...state,
-        isLoggedIn: action.payload.isLoggedIn,
+        isFetching: false,
+        isLoggedIn: true,
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        isLoggedIn: false,
       };
     default:
       return state;

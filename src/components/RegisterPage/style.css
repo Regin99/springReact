@@ -1,4 +1,4 @@
-.login_form {
+.signup_form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,14 +6,23 @@
   margin-top: 20vh;
 }
 
-.login_form label {
+.signup_form label {
   display: flex;
   flex-direction: column;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
-.login_form input[type="text"],
+.signup_form label input{
+  width: 250px;
+
+}
+
+.name-container{
+  display: flex;
+}
+
+.signup_form input[type="text"],
 [type="password"] {
   outline: none;
   width: 100%;
@@ -24,7 +33,7 @@
   font-size: 1.5rem;
 }
 
-.login_form input[type="submit"] {
+.signup_form input[type="submit"] {
   width: 100px;
   height: 2rem;
   border: none;
@@ -34,27 +43,10 @@
   font-size: 1.5rem;
   cursor: pointer;
 }
-.button-container {
-  display: flex;
-  justify-content:space-between;
-  width: 300px;
+.error{
+  color: red;
+  font-size: 15px;
 }
-.login_form input[type="button"] {
-  width: 100px;
-  height: 2rem;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  color: #00bcd4;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-.login_form input[type="button"]:hover {
-  background-color: #00bcd4;
-  color: #fff;
-}
-
-
-.login_form input[type="submit"]:hover {
+.signup_form input[type="submit"]:hover {
   background-color: #00acc1;
-}
+} 
