@@ -52,7 +52,12 @@ export const signUp =
         dispatch(loginSuccess());
       })
       .catch((error) => {
-        dispatch(signupFailure(error.response.data));
-        console.log(error.response.data);
+        if (error.response.status === 400) {
+          dispatch(signupFailure(error.response.data));
+        }
+        if (error.response.status === 500) {
+          alert(error.response.data);
+          dispatch(signupFailure());
+        }
       });
   };

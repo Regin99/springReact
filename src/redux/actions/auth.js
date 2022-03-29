@@ -24,7 +24,12 @@ export const auth = (userName, password) => (dispatch) => {
       dispatch(loginSuccess());
     })
     .catch((error) => {
-      dispatch(loginFailure());
-      console.log(error);
+      if (error.response.status === 401) {
+        dispatch(loginFailure(error.response.data));
+        alert(error.response.data);
+      } else {
+        dispatch(loginFailure());
+        alert("cannot connect to server");
+      }
     });
 };
