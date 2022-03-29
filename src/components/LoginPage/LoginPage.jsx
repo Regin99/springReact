@@ -3,16 +3,16 @@ import { useState, useEffect } from "react";
 import Loader from "../Loader/Loader";
 import { connect } from "react-redux";
 import "./style.css";
-import { loginThunk } from "../../redux/actions/auth";
+import { auth } from "../../redux/actions/auth";
 
-const LoginPage = ({ isAuthenticated, isFetching, loginThunk }) => {
-  const [login, setLogin] = useState("");
+const LoginPage = ({ isAuthenticated, isFetching, auth }) => {
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const handleInput = (e) => {
     switch (e.target.name) {
       case "login":
-        setLogin(e.target.value);
+        setUserName(e.target.value);
         break;
       case "password":
         setPassword(e.target.value);
@@ -23,9 +23,14 @@ const LoginPage = ({ isAuthenticated, isFetching, loginThunk }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginThunk(login, password);
-    setLogin("");
+    auth(userName, password);
+    setUserName("");
     setPassword("");
+  };
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    navigate("/signup");
   };
 
   useEffect(() => {
@@ -40,7 +45,12 @@ const LoginPage = ({ isAuthenticated, isFetching, loginThunk }) => {
     <form className="login_form">
       <label>
         Login:
-        <input type="text" name="login" value={login} onChange={handleInput} />
+        <input
+          type="text"
+          name="login"
+          value={userName}
+          onChange={handleInput}
+        />
       </label>
       <label>
         Password:
@@ -51,7 +61,10 @@ const LoginPage = ({ isAuthenticated, isFetching, loginThunk }) => {
           onChange={handleInput}
         />
       </label>
-      <input type="submit" value="Login" onClick={handleSubmit} />
+      <div className="button-container">
+        <input type="submit" value="Login" onClick={handleSubmit} />
+        <input type="button" value="Signup" onClick={handleSignup} />
+      </div>
     </form>
   );
 };
@@ -65,7 +78,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginThunk: (login, password) => dispatch(loginThunk(login, password)),
+    auth: (userName, password) => dispatch(auth(userName, password)),
   };
 };
 

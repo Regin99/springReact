@@ -1,26 +1,30 @@
-import { loginAction, fetchingAction } from "../actionCreators";
+import { loginRequest, loginFailure, loginSuccess } from "../actionCreators";
 import axios from "axios";
 
-export const fakeLoginRequest = (login, password) => {
-  return axios.post("http://localhost:5000/login", {
-    login,
-    password,
-  });
+export const fakeLoginRequest = (userName, password) => {
+  return axios.post(
+    "http://localhost:5000/login",
+    {
+      userName,
+      password,
+    },
+    {
+      withCredentials: true,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
 };
-export const loginThunk = (login, password) => (dispatch) => {
-  dispatch(fetchingAction(true));
-  fakeLoginRequest(login, password)
+export const auth = (userName, password) => (dispatch) => {
+  dispatch(loginRequest());
+  fakeLoginRequest(userName, password)
     .then((response) => {
-      dispatch(fetchingAction(false));
-      if (response.data.isLoggedIn) {
-        dispatch(loginAction(login, password, response.data.isLoggedIn));
-      } else {
-        alert("Wrong login or password");
-      }
+      localStorage.setItem("token", response.data.token);
+      dispatch(loginSuccess());
     })
     .catch((error) => {
-      dispatch(fetchingAction(false));
-      alert("cannot connect to server");
+      dispatch(loginFailure());
       console.log(error);
     });
 };

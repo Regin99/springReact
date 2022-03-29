@@ -1,18 +1,26 @@
 import axios from "axios";
-import { fetchingAction, getProjectsAction } from "../actionCreators";
+import {
+  getProjectsFailure,
+  getProjectsRequest,
+  getProjectsSuccess,
+} from "../actionCreators";
 const request = () => {
-  return axios.get("http://localhost:5000/");
+  return axios.get("http://localhost:5000/", {
+    withCredentials: true,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 };
 
-export const getProjectsThunk = () => (dispatch) => {
-  dispatch(fetchingAction(true));
+export const getProjects = () => (dispatch) => {
+  dispatch(getProjectsRequest());
   request()
     .then((response) => {
-      dispatch(fetchingAction(false));
-      dispatch(getProjectsAction(response.data));
+      dispatch(getProjectsSuccess(response.data));
     })
     .catch((error) => {
-      dispatch(fetchingAction(false));
+      dispatch(getProjectsFailure());
       alert("cannot connect to server");
       console.log(error);
     });
